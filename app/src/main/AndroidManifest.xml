@@ -12,6 +12,15 @@
         android:theme="@style/Theme.ChatMessenger"
         tools:targetApi="31">
         <activity
+            android:name=".activity.PropfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.NumberActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ChatMessenger.noactionBar">

@@ -1,17 +1,21 @@
 package com.vibhav.chatmessenger
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.vibhav.chatmessenger.Adapter.ViewPagerAdapter
 import com.vibhav.chatmessenger.Fragments.CallFragment
 import com.vibhav.chatmessenger.Fragments.ChatFragment
 import com.vibhav.chatmessenger.Fragments.StatusFragment
+import com.vibhav.chatmessenger.activity.NumberActivity
 import com.vibhav.chatmessenger.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private var binding : ActivityMainBinding? =null
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -22,6 +26,13 @@ class MainActivity : AppCompatActivity() {
         fragmentArrayList.add(ChatFragment())
         fragmentArrayList.add(StatusFragment())
         fragmentArrayList.add(CallFragment())
+
+        auth = FirebaseAuth.getInstance()
+
+        if(auth.currentUser == null){
+            startActivity(Intent(this, NumberActivity::class.java))
+            finish()
+        }
 
         val adapter = ViewPagerAdapter(this, supportFragmentManager, fragmentArrayList)
 
